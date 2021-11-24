@@ -1,9 +1,15 @@
 import React from "react";
+import { useParams, useNavigate } from 'react-router-dom';
+
 import "./menu-item.styles.scss"
 
 const MenuItem = (props) => {
+    let params = useParams();
+    let navigate = useNavigate();
+    // props.history.push(`${props.match.url}${props.linkUrl}`) }>
     return (
-        <div className={ `${props.size} menu-item` }>
+        <div className={ `${props.size} menu-item` } onClick={ () => navigate(`/${props.linkUrl}`)}>
+            
             <div
                 className="background-image" 
                 style={{
