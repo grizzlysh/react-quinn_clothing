@@ -1,10 +1,10 @@
 import React from "react";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import "./menu-item.styles.scss"
 
 const MenuItem = (props) => {
-    let params = useParams();
+    // let params = useParams();
     let navigate = useNavigate();
     // props.history.push(`${props.match.url}${props.linkUrl}`) }>
     return (
