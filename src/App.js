@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import './App.css';
@@ -47,6 +47,10 @@ class App extends Component {
   
 
   render() {
+    const SignInWrapper = ({ children, currentUser }) => {
+      return currentUser ? <Navigate to="/" replace /> : children;
+    };
+
     return (
       <div>
           <Header />
@@ -54,15 +58,27 @@ class App extends Component {
             <Route exact path='/'element={<HomePage />} />
             <Route path='/:menuId'element={<MenuItem />} />
             <Route path='/shop'element={<ShopPage />} />
-            <Route path='/signin'element={<SignInAndSignUpPage />} />
+            <Route exact path='/signin' element={
+              <SignInWrapper currentUser={this.props.currentUser}>
+                <SignInAndSignUpPage />
+              </SignInWrapper>
+            } />
+            
+            {/* <Route exact path='/signin' render={ () => 
+              (this.props.currentUser) ? <Navigate to="/" /> :  <SignInAndSignUpPage /> } /> */}
+            {/* <Route exact path='/signin'element={<SignInAndSignUpPage />} /> */}
           </Routes>
       </div>
     );
   }
 }
 
+const mapStateToProps = (reducer) => ({
+  currentUser: reducer.user.currentUser
+});
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
-})
+});
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
