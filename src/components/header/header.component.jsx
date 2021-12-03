@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import './header.styles.scss'
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
-const Header = ({ currentUser }) => {
-    
-    console.log(currentUser);
+const Header = ({ currentUser, hiddenCart }) => {
     return (
         <div className="header">
             <Link className="logo-container" to="/">
@@ -23,18 +23,23 @@ const Header = ({ currentUser }) => {
                     :
                     <Link className="option" to="/signin">SIGN IN</Link>
                 }
+                <CartIcon />
                 {
-                    currentUser!=null && (<div className="option">{currentUser.displayName}</div>)
+                    // currentUser!=null && (<div className="option">{currentUser.displayName}</div>)
                 }
             </div>
+            {
+                !hiddenCart && <CartDropdown />
+            }
             
         </div>
     )
 }
 
 // state = root reducer
-const mapStateToProps = state => ({
-    currentUser: state.user.currentUser
+const mapStateToProps = ({user: { currentUser }, cart: { hiddenCart } }) => ({
+    currentUser,
+    hiddenCart
 })
 
 export default connect(mapStateToProps)(Header);
