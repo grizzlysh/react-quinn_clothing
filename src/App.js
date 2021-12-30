@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+
 import { connect } from 'react-redux';
-import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 import { onSnapshot } from 'firebase/firestore';
+import { createStructuredSelector } from 'reselect';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selector';
-import { createStructuredSelector } from 'reselect';
+// import { selectCollectionForPreview } from './redux/shop/shop.selector';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 
 // import MenuItem from './components/menu-item/menu-item.component';
 import './App.css';
@@ -13,7 +15,7 @@ import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
 import CheckoutPage from './pages/checkout/checkout.component';
-import CollectionPage from './pages/collection/collection.component';
+// import CollectionPage from './pages/collection/collection.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 // import CollectionsOverview from './components/collections-overview/collections-overview.component';
 
@@ -39,6 +41,8 @@ class App extends Component {
       else{
         setCurrentUser(userAuth);
       }
+
+      // addCollectionAndDocuments('collections', collectionArray.map( ({title, items}) => ({title, items}) ))
       
       // console.log(this.currentUser);
     })
@@ -61,9 +65,9 @@ class App extends Component {
           <Routes>
             <Route exact path='/'element={<HomePage />} />
             {/* <Route path='/:menuId'element={<MenuItem />} /> */}
-            <Route path='/shop'element={<ShopPage />} />
+            <Route path='/shop/*'element={<ShopPage />} />
             {/* <Route path='/shop'element={<CollectionsOverview />} />           */}
-            <Route path='/shop/:categoryId'element={<CollectionPage />} />
+            {/* <Route path='/shop/:categoryId'element={<CollectionPage />} /> */}
             <Route exact path='/checkout'element={<CheckoutPage />} />
             <Route exact path='/signin' element={
               <SignInWrapper currentUser={this.props.currentUser}>
@@ -81,7 +85,8 @@ class App extends Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  // collectionArray: selectCollectionForPreview
 });
 
 const mapDispatchToProps = dispatch => ({
