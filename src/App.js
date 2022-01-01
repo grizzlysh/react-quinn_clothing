@@ -45,7 +45,7 @@ class App extends Component {
       // addCollectionAndDocuments('collections', collectionArray.map( ({title, items}) => ({title, items}) ))
       
       // console.log(this.currentUser);
-    })
+    }, error => console.log(error))
   }
 
   componentWillUnmount(){
