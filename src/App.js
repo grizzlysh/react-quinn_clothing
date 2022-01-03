@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { onSnapshot } from 'firebase/firestore';
 import { createStructuredSelector } from 'reselect';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selector';
+// import { onSnapshot } from 'firebase/firestore';
 // import { selectCollectionForPreview } from './redux/shop/shop.selector';
-import { auth, createUserProfileDocument } from './firebase/firebase.utils'
+// import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 
 // import MenuItem from './components/menu-item/menu-item.component';
 import './App.css';
@@ -24,28 +24,29 @@ class App extends Component {
   unsubscribeFromAuth = null;
 
   componentDidMount(){
-    const { setCurrentUser } = this.props;
-    this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
+    // const { setCurrentUser } = this.props;
+    
+    // this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
       
-      if (userAuth) {
-        // this.setState({ currentUser: user });
-        const userRef = await createUserProfileDocument(userAuth);
+    //   if (userAuth) {
+    //     // this.setState({ currentUser: user });
+    //     const userRef = await createUserProfileDocument(userAuth);
 
-        onSnapshot( userRef, (snapShot) => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
-          });
-        });
-      }
-      else{
-        setCurrentUser(userAuth);
-      }
+    //     onSnapshot( userRef, (snapShot) => {
+    //       setCurrentUser({
+    //         id: snapShot.id,
+    //         ...snapShot.data()
+    //       });
+    //     });
+    //   }
+    //   else{
+    //     setCurrentUser(userAuth);
+    //   }
 
-      // addCollectionAndDocuments('collections', collectionArray.map( ({title, items}) => ({title, items}) ))
+    //   // addCollectionAndDocuments('collections', collectionArray.map( ({title, items}) => ({title, items}) ))
       
-      // console.log(this.currentUser);
-    }, error => console.log(error))
+    //   // console.log(this.currentUser);
+    // }, error => console.log(error))
   }
 
   componentWillUnmount(){

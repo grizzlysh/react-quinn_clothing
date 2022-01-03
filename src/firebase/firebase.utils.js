@@ -80,11 +80,11 @@ export const convertCollectionsSnapshotToMap = (collectionsSnapshot) => {
     }, {});
 };
 
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
+export const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
 // export const signInWithGoogle = () => firebase.auth().signInWithPopUp(provider);
 
-export const signInWithGoogle = () => (signInWithPopup(auth, provider)
+export const signInWithGoogle = () => (signInWithPopup(auth, googleProvider)
     .then((result) => {
         // // This gives you a Google Access Token. You can use it to access the Google API.
         // const credential = GoogleAuthProvider.credentialFromResult(result);
