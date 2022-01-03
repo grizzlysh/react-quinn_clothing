@@ -9,7 +9,8 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 // import WithSpinner from '../../components/with-spinner/with-spinner.component';
 // import CollectionsOverview from '../../components/collections-overview/collections-overview.component';
 import CollectionPageContainer from '../collection/collection.container';
-import { fetchCollectionsStartAsync } from '../../redux/shop/shop.action';
+import { fetchCollectionsStart } from '../../redux/shop/shop.action';
+// import { fetchCollectionsStart } from '../../redux/shop/shop.sagas';
 import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview.container';
 
 
@@ -24,9 +25,9 @@ class ShopPage extends React.Component {
     // unsubscribeFromSnapshot = null;
 
     componentDidMount() {
-        const { fetchCollectionsStartAsync } = this.props;
+        const { fetchCollectionsStart } = this.props;
 
-        fetchCollectionsStartAsync();
+        fetchCollectionsStart();
 
 
         // const { updateCollections } = this.props;
@@ -83,7 +84,7 @@ class ShopPage extends React.Component {
 // })
 
 const mapDispatchToProps = dispatch => ({
-    fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync())
+    fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
     // updateCollections: collectionsMap => dispatch(updateCollections(collectionsMap))
 })
 
