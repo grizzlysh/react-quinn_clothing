@@ -3,22 +3,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selector';
 // import { onSnapshot } from 'firebase/firestore';
+// import { setCurrentUser } from './redux/user/user.actions';
 // import { selectCollectionForPreview } from './redux/shop/shop.selector';
 // import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 
-// import MenuItem from './components/menu-item/menu-item.component';
 import './App.css';
 import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
 import CheckoutPage from './pages/checkout/checkout.component';
-// import CollectionPage from './pages/collection/collection.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+// import MenuItem from './components/menu-item/menu-item.component';
+// import CollectionPage from './pages/collection/collection.component';
 // import CollectionsOverview from './components/collections-overview/collections-overview.component';
-
 
 class App extends Component {
   unsubscribeFromAuth = null;
@@ -90,8 +89,8 @@ const mapStateToProps = createStructuredSelector({
   // collectionArray: selectCollectionForPreview
 });
 
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
-});
+// const mapDispatchToProps = dispatch => ({
+//   setCurrentUser: user => dispatch(setCurrentUser(user))
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
