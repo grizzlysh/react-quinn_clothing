@@ -15,6 +15,7 @@ import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import { checkUserSessions } from './redux/user/user.actions';
 // import MenuItem from './components/menu-item/menu-item.component';
 // import CollectionPage from './pages/collection/collection.component';
 // import CollectionsOverview from './components/collections-overview/collections-overview.component';
@@ -23,6 +24,9 @@ class App extends Component {
   unsubscribeFromAuth = null;
 
   componentDidMount(){
+    const { checkUserSessions } = this.props;
+    checkUserSessions();
+
     // const { setCurrentUser } = this.props;
     
     // this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
@@ -89,8 +93,9 @@ const mapStateToProps = createStructuredSelector({
   // collectionArray: selectCollectionForPreview
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   setCurrentUser: user => dispatch(setCurrentUser(user))
-// });
+const mapDispatchToProps = dispatch => ({
+  // setCurrentUser: user => dispatch(setCurrentUser(user))
+  checkUserSessions: () => dispatch(checkUserSessions())
+});
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
