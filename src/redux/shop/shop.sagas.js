@@ -6,7 +6,7 @@ import { ShopActionTypes } from './shop.types'
 import { fetchCollectionsSuccess, fetchCollectionsFailure } from './shop.action';
 
 export function* fetchCollectionsAsync() {
-    yield console.log('i am fired');
+    // yield console.log('i am fired');
 
     try {
 
